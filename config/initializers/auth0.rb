@@ -9,6 +9,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     callback_path: '/auth/auth0/callback',
     authorize_params: {
       scope: 'openid profile email'
+      # Alternative way of passing params to Auth0  
+      # organization: "org_rx532f12PN7E3rAQ"
     }
   )
 end

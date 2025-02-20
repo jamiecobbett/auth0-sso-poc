@@ -1,5 +1,11 @@
 <section class="jumbotron text-center">
   <h2><img class="jumbo-thumbnail" src="https://cdn.auth0.com/styleguide/1.0.0/img/badge.svg"></h2>
   <h1>RoR Auth0 Sample</h1>
-  <%= button_to 'Login', '/auth/auth0', method: :post, class: 'btn btn-success btn-lg', id: 'qsLoginBtn' unless session[:userinfo].present? %>
+  <%# 
+    This will pass the org ID to auth0 - it gets included in the URL we redirect the user to
+    We should be able to add a preceding page on our site where users fill in just their email, and we inspect that to decide if they are SSO or a "direct" login
+  %>
+  <% auth0_org_id = "org_rx532f12PN7E3rAQ" %>
+  Hello member of <%= auth0_org_id %> click below to login with SSO
+  <%= button_to 'Login', "/auth/auth0?organization=#{auth0_org_id}", method: :post, class: 'btn btn-success btn-lg', id: 'qsLoginBtn' unless session[:userinfo].present? %>
 </section>
