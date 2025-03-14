@@ -68,7 +68,7 @@ def create_sso_ticket(self_service_profile_id, organization_id)
   body = {
     # "connection_id": "string",
     "connection_config": {
-      "name": "this-is-the-conn-name",
+      "name": "this-is-the-conn-name-#{Time.now.to_i}",
       "display_name": "this is the conn display name",
       # "is_domain_connection": true, # "promotes to a domain-level connection so that third-party applications can use it"
       "show_as_button": true,
@@ -83,10 +83,10 @@ def create_sso_ticket(self_service_profile_id, organization_id)
       #   ]
       # }
     },
-    # "clients" are apps, eg merchant-dashboard
-    # "enabled_clients": [
-    #   "string"
-    # ],
+    "clients" are apps, eg merchant-dashboard
+    "enabled_clients": [
+      "string"
+    ],
     "enabled_organizations": [
       {
         "organization_id": organization_id
@@ -106,12 +106,12 @@ end
 
 
 # # * Create an Auth0 Organisation via Mgmt API - simulates the merchant enabling SSO
-# timestamp = Time.now.to_i # make the name unique
-# merchant_org = create_organisation("machine_friendly_name_#{timestamp}", "Human name #{timestamp}")
+timestamp = Time.now.to_i # make the name unique
+merchant_org = create_organisation("machine_friendly_name_#{timestamp}", "Human name #{timestamp}")
 
-# puts merchant_org.fetch("id")
-# organization_id = merchant_org.fetch("id")
-organization_id = "org_rx532f12PN7E3rAQ" # "My Company Ltd"
+puts merchant_org
+organization_id = merchant_org.fetch("id")
+# organization_id = "org_rx532f12PN7E3rAQ" # "My Company Ltd"
 
 
 # Create the "Self service profile"
@@ -120,6 +120,7 @@ organization_id = "org_rx532f12PN7E3rAQ" # "My Company Ltd"
 
 # I've manually created the profile in the dashboard as I don't think we'd use the API to create it
 self_service_profiles = make_request(:get, url: '/api/v2/self-service-profiles')
+puts self_service_profiles
 self_service_profile_id = self_service_profiles[0].fetch("id")
 
 
