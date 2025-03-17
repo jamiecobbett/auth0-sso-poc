@@ -83,10 +83,10 @@ def create_sso_ticket(self_service_profile_id, organization_id)
       #   ]
       # }
     },
-    "clients" are apps, eg merchant-dashboard
-    "enabled_clients": [
-      "string"
-    ],
+    # "clients" are apps, eg merchant-dashboard
+    # "enabled_clients": [
+    #   "string"
+    # ],
     "enabled_organizations": [
       {
         "organization_id": organization_id
